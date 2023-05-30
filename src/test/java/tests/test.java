@@ -13,11 +13,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pages.ProductListingPage;
 
 import java.util.concurrent.TimeUnit;
 
 public class test {
-    private WebDriver driver;
+    public WebDriver driver;
+    private ProductListingPage productListingPage;
 
     @BeforeClass
     public void setUp(){
@@ -32,10 +34,12 @@ public class test {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get("https://ma.buynespresso.com/ma_fr/cafe/original.html");
+        productListingPage = new ProductListingPage(driver);
+
     }
     @Test
     public void test(){
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        productListingPage.clickOnCapsuleBy("Tokyo");
     }
     @AfterClass
     public void tearDown(){
