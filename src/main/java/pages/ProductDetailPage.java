@@ -4,24 +4,31 @@ import io.cucumber.java.en.But;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductDetailPage extends BasePage{
 
     public ProductDetailPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
-    @FindBy(className = "action tocart primary list pdpcart-btn")
+    @FindBy(id = "product_addtocart_form")
     private WebElement Button;
-    @FindBy(className = "input-text qty qty-selector-input")
+    @FindBy(id = "qty")
     private WebElement quantityField;
     @FindBy(id = "product-addtocart-button")
     private WebElement confirm;
+    @FindBy(id = "_evidon-accept-button")
+    private WebElement handleCookie;
 
     public void addProductBy(int quantity){
-        waitElement(driver,10, Button);
         Button.click();
         quantityField.sendKeys(String.valueOf(quantity));
         confirm.click();
+    }
+    public void handleCookie(){
+        waitElement(driver,15,handleCookie);
+        handleCookie.click();
     }
 }

@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pages.Cart;
+import pages.ProductDetailPage;
 import pages.ProductListingPage;
 
 import java.util.concurrent.TimeUnit;
@@ -20,6 +22,8 @@ import java.util.concurrent.TimeUnit;
 public class test {
     public WebDriver driver;
     private ProductListingPage productListingPage;
+    private ProductDetailPage productDetailPage;
+    private Cart cart;
 
     @BeforeClass
     public void setUp(){
@@ -35,11 +39,16 @@ public class test {
         driver.manage().window().maximize();
         driver.get("https://ma.buynespresso.com/ma_fr/cafe/original.html");
         productListingPage = new ProductListingPage(driver);
+        productDetailPage = new ProductDetailPage(driver);
+        cart = new Cart(driver);
 
     }
     @Test
     public void test(){
         productListingPage.clickOnCapsuleBy("Tokyo");
+        productDetailPage.handleCookie();
+        productDetailPage.addProductBy(10);
+        cart.openCart();
     }
     @AfterClass
     public void tearDown(){
