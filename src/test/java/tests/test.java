@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -49,6 +50,10 @@ public class test {
         productDetailPage.handleCookie();
         productDetailPage.addProductBy(10);
         cart.openCart();
+        cart.checkElement();
+        //Assertions
+        Assert.assertEquals(cart.getProductQuantityFromCart(),"10");
+        Assert.assertEquals(cart.getProductNameFromCart(),"Tokyo Vivalto Lungo");
     }
     @AfterClass
     public void tearDown(){

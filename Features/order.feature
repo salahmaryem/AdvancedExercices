@@ -10,4 +10,4 @@ Feature: the aim of this technical test is to see how the candiate will use loca
     Then Mini cart contains <quantity> units of <product> capsule
     Examples:
       |product|quantity|
-      |TOKYO VIVALTO LUNGO| 10 |
+      |Tokyo Vivalto Lungo| 10 |

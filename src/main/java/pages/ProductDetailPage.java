@@ -21,6 +21,8 @@ public class ProductDetailPage extends BasePage{
     private WebElement confirm;
     @FindBy(id = "_evidon-accept-button")
     private WebElement handleCookie;
+    @FindBy(xpath = "//div[contains(@class,'success message')]/div")
+    private WebElement  confirmationMessage;
 
     public void addProductBy(int quantity){
         Button.click();
