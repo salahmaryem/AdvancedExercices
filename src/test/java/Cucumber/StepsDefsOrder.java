@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -23,7 +24,9 @@ public class StepsDefsOrder {
     private Cart cart;
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+        Dotenv dotenv = Dotenv.load();
+        String browserName = dotenv.get("BROWSER_NAME");
+        System.setProperty(browserName, "drivers/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         options.addArguments("--disable-notifications");
@@ -42,6 +45,7 @@ public class StepsDefsOrder {
         productListingPage = new ProductListingPage(driver);
         productDetailPage = new ProductDetailPage(driver);
         cart = new Cart(driver);
+        productDetailPage.handleCookie();
     }
 
     @When("^User scrolls to  (.+) capsule$")
@@ -51,7 +55,7 @@ public class StepsDefsOrder {
 
     @And("^User adds (.+) units of (.+) capsule to cart$")
     public void userAddsQuantityUnitsOfProductCapsuleToCart(int quantity,String product) {
-        productDetailPage.handleCookie();
+        //productDetailPage.handleCookie();
         productDetailPage.addProductBy(quantity);
     }
 
